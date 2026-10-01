@@ -1,0 +1,7 @@
+screenshots/
+node_modules/
+scripts/fuentes/fotos/
+scripts/fuentes/*.ttf
+.DS_Store
+Thumbs.db
+__pycache__/

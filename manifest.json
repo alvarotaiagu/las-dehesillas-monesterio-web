@@ -1,0 +1,11 @@
+{
+  "name": "Las Dehesillas · Alojamiento Rural",
+  "short_name": "Las Dehesillas",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#F4F0E8",
+  "theme_color": "#6E2A22",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

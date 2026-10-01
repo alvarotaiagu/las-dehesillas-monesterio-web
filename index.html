@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<!--
+  Las Dehesillas · Alojamiento Rural · Ctra. Santa María – Pallares, km 32 (BA-067) · Monesterio (Badajoz)
+  Concepto: «Cal y almagre». La web es un muro encalado y el zócalo de almagre
+  de su cortijo es su línea de fuerza: se forma en la cortina, es la base del
+  hero, separa las secciones grandes, es la barra de lectura de la cabecera y
+  cierra la página. Letra copiada del logo: Anton + Spectral.
+
+  Datos, fotos y pendientes para el dueño: ver README.md.
+  El módulo «Celebraciones» se puede quitar: receta en el README.
+-->
+<!-- ═══ [MANDO DE MAQUETA] AVISO: esta maqueta lleva un mando de demostración
+     (abajo a la izquierda, solo con ?revision en la URL) que cambia entre dos
+     densidades visuales. NO DEBE VIAJAR A PRODUCCIÓN: node scripts/quitar-mando.mjs
+     fin del bloque [MANDO DE MAQUETA] ═══ -->
+<html lang="es" class="sin-js densidad-cal">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Las Dehesillas · Alojamiento rural en la dehesa, Monesterio (Badajoz)</title>
+<meta name="description" content="Tres casas de cal en una dehesa de encinas centenarias, en la Sierra de Aguafría (Monesterio, Badajoz). 10 habitaciones con baño privado, de 22 a 34 personas. Piscina de agua salada, pádel, caballos.">
+<meta name="theme-color" content="#6E2A22">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Las Dehesillas · Alojamiento Rural">
+<meta property="og:description" content="Tres casas de cal en la dehesa. Sierra de Aguafría, Monesterio (Badajoz).">
+<meta property="og:image" content="assets/og-las-dehesillas.jpg">
+<meta property="og:locale" content="es_ES">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Spectral+SC:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/estilos.css?v=5d5142ad">
+<link rel="stylesheet" href="css/celebraciones.css?v=669691d5" data-modulo="celebraciones">
+<script>
+/* Bloqueante a propósito: la clase de JS (y la densidad de la maqueta) se
+   resuelven antes del primer pintado. */
+(function () {
+  var h = document.documentElement;
+  h.classList.remove('sin-js');
+  h.classList.add('con-js');
+  /* red de seguridad: si main.js no llega, la cortina se va igual */
+  setTimeout(function () { h.classList.add('cortina-fuera'); }, 7000);
+  /* [MANDO DE MAQUETA] la densidad guardada solo cuenta en modo revisión (?revision) */
+  if (!/[?&]revision\b/.test(location.search)) return;
+  try {
+    var d = localStorage.getItem('dehesillas-densidad');
+    if (d === 'sobria' || d === 'cal') {
+      h.classList.remove('densidad-cal', 'densidad-sobria');
+      h.classList.add('densidad-' + d);
+    }
+  } catch (e) {}
+  /* fin del bloque [MANDO DE MAQUETA] */
+})();
+</script>
+<noscript><style>.cortina{display:none!important}</style></noscript>
+</head>
+<body>
+
+<!-- simbolos:inicio · generado por scripts/logo.py, no editar a mano -->
+<svg class="simbolos" width="0" height="0" aria-hidden="true" focusable="false"><defs><symbol id="mm" viewBox="0 0 178 176"><path fill="currentColor" fill-rule="evenodd" d="M110.6 171.4C110.3 171.3 110.1 171.2 110.0 171.2C109.4 170.4 108.9 169.4 108.8 169.0C108.8 168.8 108.6 168.3 108.4 168.0C108.3 167.7 108.1 167.1 108.0 166.8C107.9 166.4 107.7 165.8 107.5 165.4C107.3 165.0 107.0 164.3 106.9 163.8C106.8 163.3 106.6 162.7 106.4 162.3C106.2 162.0 106.0 161.4 105.9 161.1C105.8 160.7 105.6 160.2 105.4 159.9C105.3 159.6 105.1 159.0 104.9 158.6C104.8 158.2 104.6 157.6 104.5 157.4C104.4 157.2 104.1 156.5 104.0 156.0C103.8 155.5 103.6 154.8 103.4 154.4C103.2 154.0 103.0 153.4 102.9 153.1C102.9 152.7 102.7 152.3 102.5 152.1C102.2 151.7 102.1 151.4 102.0 150.8C101.9 150.2 101.7 149.8 101.5 149.4C101.3 149.1 101.0 148.4 100.9 147.9C100.8 147.4 100.6 146.7 100.4 146.3C100.2 146.0 100.0 145.4 99.9 145.1C99.9 144.8 99.7 144.3 99.5 144.1C99.3 143.8 99.1 143.2 99.0 142.8C98.9 142.5 98.7 141.9 98.6 141.6C98.4 141.4 98.2 140.7 98.1 140.3C97.9 139.8 97.7 139.2 97.6 138.9C97.4 138.6 97.1 138.0 97.0 137.4C96.9 136.9 96.6 136.3 96.5 136.0C96.3 135.8 96.1 135.3 96.1 135.0C96.0 134.7 95.8 134.1 95.5 133.7C95.3 133.2 95.1 132.6 95.0 132.2C94.9 131.8 94.7 131.1 94.4 130.7C94.1 130.0 94.0 129.8 94.0 129.1C94.0 127.3 92.3 125.9 91.9 127.4C91.7 128.1 91.9 165.9 92.1 166.2C92.9 168.0 94.7 169.0 96.9 169.0C98.5 169.0 99.4 170.6 98.2 171.2C97.7 171.5 82.0 171.5 81.5 171.3C81.1 171.0 80.8 170.3 80.9 169.8C81.0 169.2 81.4 169.0 82.5 169.0C84.0 169.0 86.5 168.1 86.9 167.4C86.9 167.3 87.2 166.5 87.4 165.7L87.9 164.2L87.9 146.2C88.0 125.9 87.9 125.6 87.4 124.4C86.7 123.0 86.7 123.0 84.2 122.9C81.5 122.7 81.0 122.5 80.9 121.1C80.8 120.1 81.2 119.9 82.4 119.9C83.0 119.9 83.6 119.8 84.1 119.6C84.5 119.5 85.2 119.3 85.7 119.3C86.7 119.1 86.9 118.9 87.5 117.6L87.9 116.6L88.0 97.0C88.0 75.5 88.1 76.7 87.3 77.1C86.9 77.3 86.1 79.1 85.9 79.9C85.9 80.2 85.7 80.7 85.4 81.1C85.2 81.5 85.0 82.0 84.9 82.3C84.9 82.6 84.7 83.2 84.4 83.7C84.2 84.2 84.0 84.7 84.0 84.9C84.0 85.1 83.8 85.6 83.6 86.1C83.3 86.5 83.1 87.2 83.0 87.5C82.9 87.9 82.7 88.5 82.5 88.8C82.3 89.2 82.1 89.8 82.0 90.3C81.9 90.7 81.7 91.4 81.5 91.7C81.3 92.1 81.1 92.7 81.0 93.1C80.9 93.5 80.7 94.0 80.5 94.3C80.4 94.5 80.1 95.2 80.0 95.7C79.9 96.2 79.6 96.9 79.5 97.2C79.3 97.5 79.1 98.0 79.0 98.4C78.9 98.8 78.7 99.3 78.5 99.7C78.3 100.0 78.1 100.7 78.0 101.0C77.9 101.4 77.7 102.0 77.5 102.4C77.3 102.8 77.1 103.4 77.0 103.9C76.9 104.3 76.7 104.9 76.6 105.2C76.4 105.5 76.2 106.1 76.0 106.6C75.9 107.0 75.6 107.6 75.5 107.8C75.4 108.0 75.2 108.6 75.1 109.0C75.0 109.5 74.7 110.1 74.5 110.4C74.3 110.8 74.1 111.3 74.1 111.7C74.0 112.1 73.8 112.8 73.6 113.2C73.3 113.7 73.1 114.4 73.0 114.8C72.9 115.2 72.7 115.8 72.5 116.2C72.3 116.5 72.1 116.9 72.1 117.1C72.1 117.2 71.9 117.7 71.7 118.2C71.5 118.8 71.2 119.6 71.1 120.1C70.3 123.3 67.2 123.8 66.2 120.8C66.1 120.6 65.9 119.9 65.7 119.4C65.1 117.6 64.7 116.4 64.4 116.0C64.3 115.8 64.1 115.3 64.0 114.9C63.9 114.5 63.7 113.9 63.5 113.6C63.3 113.3 63.1 112.7 63.0 112.3C62.9 111.9 62.7 111.2 62.5 110.9C62.3 110.5 62.1 109.9 62.0 109.5C61.9 109.2 61.7 108.7 61.5 108.4C61.3 108.1 61.1 107.5 61.0 107.1C60.9 106.7 60.7 106.1 60.4 105.6C60.2 105.2 60.0 104.7 60.0 104.5C60.0 104.3 59.8 103.8 59.6 103.4C59.4 103.0 59.1 102.3 59.0 101.9C58.9 101.4 58.7 100.9 58.6 100.6C58.2 100.1 58.0 99.6 58.0 99.1C58.0 98.9 57.8 98.4 57.6 98.0C57.4 97.7 57.2 97.0 57.1 96.7C57.0 96.3 56.8 95.8 56.6 95.4C56.4 95.1 56.2 94.4 56.1 93.9C55.9 93.5 55.7 92.8 55.5 92.5C55.3 92.2 55.1 91.6 55.0 91.2C54.9 90.7 54.7 90.0 54.4 89.6C54.2 89.1 54.0 88.6 54.0 88.5C54.0 88.4 53.9 88.0 53.7 87.7C53.5 87.3 53.3 86.6 53.1 86.1C53.0 85.5 52.7 84.8 52.5 84.4C52.2 84.0 52.1 83.6 52.1 82.8C52.0 81.8 51.9 81.5 51.4 81.0C51.3 80.8 51.1 80.3 51.0 80.0C50.7 78.6 49.8 77.6 49.2 78.1C48.9 78.4 48.9 116.1 49.2 117.3C49.7 119.2 50.9 120.0 53.4 120.1C55.8 120.2 56.1 120.4 55.9 121.7C55.8 122.8 55.5 122.9 39.3 122.8C38.3 122.7 37.7 121.1 38.5 120.5C38.9 120.2 39.2 120.1 41.1 120.0C43.1 119.9 44.3 118.9 44.9 117.1C45.1 116.4 45.2 80.2 45.0 77.6C44.8 74.5 43.7 73.6 39.5 73.1C38.3 73.0 38.0 72.8 38.0 72.1C38.0 70.9 37.7 71.0 46.1 71.0L53.6 70.9L54.1 71.4C54.7 72.0 55.0 72.6 55.0 73.2C55.0 73.4 55.2 73.8 55.4 74.2C55.7 74.6 55.9 75.2 56.0 75.7C56.1 76.1 56.3 76.6 56.4 76.8C56.7 77.3 56.9 77.6 57.0 78.5C57.1 79.0 57.2 79.5 57.5 79.8C57.7 80.1 57.9 80.6 58.0 81.0C58.1 81.4 58.3 82.0 58.5 82.3C58.6 82.5 58.9 83.1 59.0 83.6C59.0 84.1 59.3 84.7 59.5 85.1C59.7 85.4 59.9 86.0 60.0 86.4C60.1 86.9 60.3 87.5 60.5 87.8C60.7 88.2 60.9 88.7 61.0 89.1C61.1 89.5 61.3 90.0 61.4 90.3C61.6 90.6 61.8 91.2 61.9 91.7C62.0 92.1 62.2 92.7 62.4 93.0C62.5 93.2 62.7 93.8 62.8 94.2C62.9 94.6 63.2 95.2 63.4 95.5C63.6 95.8 63.8 96.4 63.9 96.9C63.9 97.3 64.1 97.9 64.3 98.2C64.5 98.5 64.7 99.0 64.7 99.3C64.8 99.7 65.1 100.3 65.3 100.8C65.7 101.7 66.1 102.8 66.4 103.9C66.5 104.3 66.7 104.7 66.8 104.9C66.9 105.1 67.2 105.9 67.4 106.6C67.6 107.2 68.0 108.2 68.3 108.8C68.5 109.3 68.8 109.9 68.9 110.2C69.1 111.1 70.0 111.5 70.5 111.1C70.8 110.9 71.8 108.5 71.9 107.7C72.0 107.5 72.2 107.0 72.4 106.6C72.6 106.2 72.8 105.5 72.9 105.1C73.1 104.6 73.3 104.0 73.4 103.7C73.6 103.5 73.8 102.9 73.9 102.3C74.1 101.8 74.3 101.0 74.5 100.7C74.8 100.1 75.3 98.6 75.8 97.3C75.9 96.9 76.2 96.0 76.5 95.3C76.8 94.6 77.0 93.9 77.1 93.6C77.1 93.4 77.3 92.9 77.4 92.6C77.6 92.3 77.8 91.7 77.9 91.2C78.1 90.8 78.3 90.2 78.4 89.9C78.6 89.5 78.8 88.9 78.9 88.4C79.0 88.0 79.3 87.2 79.5 86.7C79.8 86.2 80.1 85.5 80.2 85.2C80.3 84.8 80.6 83.9 80.9 83.2C81.8 80.8 82.1 79.8 82.3 79.1C82.3 78.7 82.5 78.3 82.6 78.1C82.9 77.8 83.1 77.2 83.2 76.4C83.2 76.2 83.4 75.7 83.6 75.4C83.7 75.1 84.0 74.4 84.2 73.9C84.6 72.5 85.3 71.2 85.7 71.0C86.5 70.8 99.9 70.9 100.3 71.2C101.6 71.8 100.8 73.1 99.0 73.3C95.8 73.6 95.0 74.4 94.6 77.8C94.3 79.5 94.4 113.7 94.6 116.4C94.8 119.0 95.7 119.9 98.5 120.1C101.1 120.3 101.7 121.6 99.7 122.7C98.6 123.3 98.5 124.6 99.4 126.4C99.6 126.8 99.9 127.6 100.0 128.1C100.2 128.6 100.4 129.3 100.6 129.7C100.8 130.0 101.0 130.7 101.1 131.1C101.2 131.5 101.4 132.1 101.6 132.4C101.9 133.0 102.4 134.4 102.9 135.8C103.0 136.2 103.3 136.8 103.4 137.2C103.5 137.5 103.8 138.2 103.9 138.6C104.0 139.0 104.3 139.7 104.6 140.2C104.8 140.8 105.0 141.4 105.1 141.6C105.1 141.9 105.3 142.3 105.5 142.7C105.7 143.0 105.9 143.7 106.0 144.1C106.1 144.5 106.3 145.1 106.5 145.5C106.7 145.8 107.0 146.5 107.1 147.0C107.2 147.4 107.4 148.1 107.6 148.5C107.8 148.9 108.0 149.4 108.1 149.7C108.1 150.0 108.3 150.5 108.5 150.8C108.7 151.2 109.0 151.9 109.1 152.3C109.2 152.8 109.4 153.4 109.6 153.7C109.7 154.0 109.9 154.5 110.0 154.8C110.1 155.2 110.3 155.7 110.5 156.0C110.6 156.3 110.9 157.0 111.0 157.5C111.2 158.4 111.9 159.6 112.4 159.9C112.8 160.1 113.9 158.9 114.1 158.0C114.2 157.7 114.4 157.1 114.6 156.6C114.8 156.2 115.1 155.5 115.1 155.1C115.2 154.7 115.4 154.2 115.6 153.9C115.7 153.7 116.0 153.0 116.1 152.6C116.2 152.1 116.4 151.4 116.6 151.1C116.8 150.7 117.0 150.2 117.1 149.9C117.1 149.6 117.3 149.0 117.5 148.6C117.7 148.2 117.9 147.6 118.0 147.3C118.1 147.0 118.3 146.4 118.5 146.1C118.8 145.5 119.1 144.3 119.1 143.5C119.1 143.5 119.3 143.2 119.5 142.9C119.9 142.5 119.9 142.3 120.1 141.3C120.1 141.0 120.3 140.5 120.5 140.2C120.7 139.9 120.9 139.4 121.0 138.9C121.1 138.5 121.3 138.1 121.5 137.7C121.8 137.3 121.9 137.0 122.0 136.2C122.1 135.7 122.2 135.2 122.3 135.0C122.9 134.3 123.0 134.0 123.1 133.4C123.1 132.9 123.3 132.5 123.5 132.1C123.7 131.8 123.9 131.2 124.0 130.9C124.1 130.2 124.3 129.9 124.6 129.4C124.8 129.2 124.9 128.7 125.0 128.3C125.1 127.9 125.3 127.3 125.5 126.9C125.7 126.6 125.9 126.0 126.0 125.6C126.1 125.2 126.3 124.5 126.6 124.1C126.8 123.6 127.0 123.1 127.0 122.8C127.0 122.4 128.1 120.1 128.3 119.9C128.6 119.8 142.6 119.8 143.0 120.0C143.5 120.2 143.7 120.6 143.5 121.2C143.2 121.9 142.8 122.0 141.1 122.1C139.1 122.2 138.2 122.9 137.4 124.7C137.1 125.2 137.0 165.2 137.2 166.0C137.8 167.8 139.2 168.9 141.3 169.0C141.9 169.0 142.6 169.0 142.7 169.1C143.9 169.3 143.7 171.1 142.5 171.4C141.5 171.6 124.5 171.4 124.3 171.2C123.9 170.7 124.0 169.5 124.4 169.1C124.5 169.1 125.2 169.0 126.0 169.0C127.3 168.9 127.5 168.9 128.0 168.6C128.2 168.4 128.7 168.2 129.0 168.1C129.2 168.1 129.5 167.9 129.7 167.8C130.0 167.4 130.7 165.9 130.8 165.5C131.0 164.5 130.9 127.1 130.7 126.7C130.3 125.7 129.2 126.5 128.9 128.0C128.8 128.4 128.6 128.8 128.4 129.1C128.3 129.4 128.0 130.0 127.9 130.5C127.8 131.0 127.6 131.6 127.5 131.9C127.4 132.1 127.2 132.7 127.0 133.2C126.9 133.6 126.6 134.2 126.5 134.5C126.4 134.8 126.2 135.4 126.0 135.9C125.9 136.4 125.7 137.1 125.4 137.5C125.2 138.0 125.0 138.4 124.9 138.9C124.9 139.4 124.8 139.9 124.5 140.2C124.3 140.6 124.1 141.2 123.9 141.7C123.8 142.1 123.6 142.8 123.4 143.1C123.3 143.4 123.0 144.0 122.9 144.5C122.8 145.0 122.6 145.6 122.5 145.9C122.3 146.2 122.1 146.7 122.0 147.0C121.9 147.4 121.7 147.9 121.5 148.2C121.3 148.6 121.1 149.2 120.9 149.7C120.8 150.2 120.6 150.9 120.4 151.2C120.3 151.5 120.1 152.1 119.9 152.5C119.8 153.0 119.6 153.6 119.4 153.8C119.3 154.1 119.1 154.6 119.0 155.0C118.9 155.4 118.7 156.0 118.5 156.4C118.3 156.8 118.1 157.3 118.1 157.5C118.0 157.7 117.8 158.3 117.6 158.8C117.3 159.3 117.1 160.0 117.0 160.4C116.9 160.8 116.7 161.5 116.5 161.8C116.3 162.2 116.1 162.7 116.0 163.1C115.9 163.5 115.7 164.1 115.5 164.4C115.3 164.8 115.1 165.4 115.0 165.9C114.9 166.3 114.6 167.0 114.4 167.4C114.2 167.8 114.0 168.3 114.0 168.4C114.0 168.8 113.2 170.6 112.9 170.9C112.4 171.5 111.4 171.7 110.6 171.4ZM150.9 71.5C148.9 69.6 145.5 66.6 144.7 66.1C144.5 65.9 144.1 65.7 143.9 65.4C143.2 64.7 142.1 63.9 140.6 62.9C140.2 62.7 139.6 62.2 139.2 61.9C138.5 61.3 137.5 60.5 136.5 59.9C136.2 59.8 135.8 59.5 135.5 59.3C135.3 59.2 134.8 58.9 134.4 58.6C133.9 58.4 133.3 58.0 132.9 57.8C132.5 57.5 131.9 57.2 131.5 57.1C131.1 56.9 130.5 56.6 130.2 56.4C129.9 56.2 129.5 56.0 129.4 56.0C129.2 56.0 128.8 55.8 128.3 55.6C126.7 54.8 125.1 54.0 124.8 53.9C124.6 53.9 124.1 53.7 123.8 53.5C123.4 53.3 122.9 53.1 122.7 53.1C122.5 53.0 121.8 52.8 121.1 52.5C120.4 52.2 119.6 52.0 119.2 51.9C118.8 51.8 118.2 51.6 117.8 51.4C117.4 51.2 116.6 50.9 116.0 50.8C115.5 50.7 114.7 50.5 114.3 50.3C113.9 50.2 113.0 49.9 112.4 49.8C111.7 49.7 110.9 49.5 110.6 49.4C110.3 49.2 109.5 49.0 108.9 48.9C108.2 48.8 107.4 48.6 106.9 48.4C106.3 48.2 105.8 48.1 104.2 47.9C102.9 47.8 101.9 47.7 101.5 47.5C100.4 47.1 99.2 47.0 95.8 46.9C93.4 46.9 92.4 46.8 91.4 46.6C89.4 46.2 86.2 46.2 83.6 46.6C82.2 46.8 80.3 46.9 77.9 47.0C74.4 47.1 73.4 47.2 72.2 47.7C71.9 47.8 71.0 47.9 70.2 47.9C69.4 48.0 68.5 48.1 68.3 48.2C68.0 48.3 67.5 48.5 67.1 48.6C66.7 48.7 65.9 48.9 65.3 49.0C64.7 49.0 63.9 49.2 63.4 49.3C63.0 49.5 62.3 49.7 61.7 49.8C61.2 49.9 60.4 50.2 60.0 50.4C59.6 50.6 58.8 50.8 58.3 50.9C57.8 51.0 57.1 51.3 56.8 51.4C56.5 51.6 55.9 51.8 55.4 51.9C54.9 52.0 54.3 52.2 53.9 52.4C53.6 52.6 52.9 52.8 52.4 52.9C52.0 53.0 51.4 53.3 51.1 53.4C50.8 53.6 50.3 53.8 49.9 53.9C49.6 54.0 48.9 54.2 48.5 54.4C48.1 54.7 47.5 54.9 47.3 54.9C47.1 55.0 46.6 55.2 46.3 55.4C46.0 55.6 45.4 55.9 45.1 56.0C44.7 56.1 44.3 56.4 44.2 56.5C44.1 56.6 43.7 56.9 43.3 57.0C43.0 57.1 42.4 57.4 42.0 57.6C41.7 57.9 40.7 58.5 39.9 58.9C39.0 59.4 38.0 60.0 37.6 60.3C37.1 60.6 36.6 61.0 36.4 61.1C35.4 61.5 33.4 63.0 32.4 63.8C30.3 65.6 30.1 65.8 29.8 66.0C29.5 66.2 25.8 69.5 24.8 70.4C23.4 71.7 23.0 71.9 22.6 71.7C22.2 71.4 15.2 63.7 14.6 62.9C14.4 62.6 13.8 61.9 13.2 61.3C12.7 60.7 11.8 59.7 11.4 59.2C10.9 58.6 10.0 57.6 9.4 57.0C8.7 56.3 7.9 55.4 7.5 55.0C7.1 54.6 6.5 53.9 6.0 53.4C5.1 52.4 5.0 52.1 5.7 51.4C6.0 51.1 6.7 50.5 7.3 49.9C8.8 48.4 9.2 48.4 10.2 49.6C10.4 49.9 11.1 50.7 11.8 51.5C12.5 52.2 14.0 53.8 15.1 55.1C16.2 56.3 17.5 57.8 18.1 58.4C18.7 59.1 19.8 60.3 20.6 61.1C22.5 63.1 23.1 63.4 23.9 62.4C24.1 62.2 24.4 62.0 24.7 61.8C25.0 61.7 25.5 61.3 25.9 61.0C26.4 60.6 27.0 60.1 27.3 59.9C27.6 59.7 28.1 59.3 28.4 59.0C28.8 58.7 29.5 58.2 30.0 57.9C30.5 57.5 31.2 57.0 31.5 56.7C31.8 56.5 32.2 56.1 32.5 56.0C32.8 55.9 33.4 55.5 33.9 55.2C34.3 54.9 34.9 54.5 35.2 54.4C35.5 54.2 36.1 53.9 36.4 53.6C36.8 53.4 37.4 53.1 37.8 52.9C38.1 52.7 38.7 52.4 39.1 52.2C39.5 52.0 40.0 51.7 40.2 51.5C40.4 51.4 40.7 51.2 41.0 51.1C41.3 51.0 41.8 50.8 42.0 50.6C42.3 50.4 42.8 50.1 43.1 50.1C43.4 50.0 43.9 49.7 44.2 49.5C44.5 49.3 45.1 49.1 45.5 49.0C45.9 48.9 46.4 48.7 46.6 48.6C46.8 48.4 47.2 48.2 47.4 48.1C48.6 47.6 48.7 46.2 47.8 43.9C47.6 43.5 47.3 42.8 47.2 42.2C47.0 41.7 46.8 41.1 46.7 40.9C46.6 40.7 46.3 39.9 46.1 39.2C45.9 38.4 45.7 37.6 45.6 37.3C45.4 36.8 43.9 32.6 43.1 30.2C42.1 27.1 42.2 26.5 43.5 26.0C43.8 25.9 44.2 25.7 44.4 25.6C45.2 25.1 46.1 24.6 46.4 24.6C46.8 24.6 47.8 26.5 48.0 27.8C48.1 28.3 48.4 29.0 48.6 29.5C48.8 29.9 49.0 30.5 49.1 30.8C49.1 31.2 49.3 31.7 49.5 32.1C49.7 32.4 49.9 33.0 50.0 33.4C50.1 33.8 50.3 34.3 50.4 34.5C50.8 35.0 51.0 35.7 51.0 36.1C51.0 36.3 51.2 36.9 51.4 37.3C51.7 37.8 51.9 38.5 52.0 38.9C52.1 39.3 52.2 39.8 52.4 39.9C52.7 40.3 52.8 40.6 52.9 41.3C53.1 42.3 53.1 42.4 53.5 42.9C53.8 43.3 53.9 43.5 53.9 44.0C53.9 45.1 55.7 45.4 57.5 44.5C58.1 44.2 58.6 44.1 59.4 44.0C60.0 43.9 60.7 43.8 61.1 43.6C61.5 43.4 62.2 43.2 62.6 43.2C63.5 43.1 65.3 42.7 66.2 42.4C66.6 42.2 67.6 42.1 68.4 42.0C69.5 41.9 70.2 41.8 70.8 41.6C71.6 41.3 72.1 41.2 74.8 41.1C77.5 40.9 78.4 40.8 80.5 40.6C80.8 40.5 81.7 40.4 82.5 40.4C84.4 40.2 84.8 40.1 85.0 39.7C85.2 39.2 85.2 21.6 85.0 21.1C84.6 20.1 84.6 20.2 79.7 20.1C77.5 20.1 77.6 20.2 77.6 17.1C77.7 13.8 77.4 14.0 81.4 14.1C84.0 14.1 84.8 14.0 85.0 13.7C85.0 13.5 85.1 11.8 85.1 9.9C85.1 5.2 84.9 5.5 88.3 5.5C91.1 5.5 90.9 5.1 90.9 9.9C91.0 14.6 90.5 14.1 94.4 14.0C98.6 14.0 98.4 13.9 98.5 16.8C98.7 20.1 98.8 20.0 95.0 20.0C91.9 20.0 91.5 20.1 91.2 20.7C90.9 21.1 90.8 38.6 91.0 39.5C91.2 40.3 91.9 40.5 94.1 40.6C95.1 40.7 96.5 40.8 97.1 40.9C97.8 40.9 99.0 41.1 99.9 41.1C102.3 41.3 103.3 41.5 103.8 41.7C104.0 41.8 104.8 42.0 106.0 42.1C107.4 42.2 108.1 42.3 108.9 42.6C109.5 42.8 110.2 43.0 110.6 43.0C111.5 43.0 112.4 43.2 113.2 43.6C113.6 43.8 114.4 44.0 115.1 44.1C116.1 44.2 116.5 44.3 117.0 44.6C117.6 44.9 118.0 45.0 118.5 45.1C119.2 45.1 119.4 45.2 120.0 45.6C121.5 46.7 122.8 46.0 123.1 44.0C123.1 43.6 123.3 43.2 123.5 42.8C123.8 42.4 123.9 42.0 124.0 41.3C124.1 40.5 124.1 40.3 124.5 39.9C124.7 39.7 124.9 39.5 124.9 39.5C124.9 39.1 125.2 37.8 125.5 37.2C125.7 36.8 125.9 36.1 126.0 35.7C126.1 35.3 126.3 34.7 126.5 34.3C126.7 34.0 126.9 33.4 127.0 33.0C127.1 32.6 127.3 32.0 127.5 31.6C127.7 31.3 127.9 30.8 127.9 30.7C127.9 30.6 128.1 30.0 128.3 29.4C128.6 28.8 128.9 27.8 129.0 27.2C129.3 26.0 130.1 24.6 130.5 24.6C130.7 24.6 133.2 25.8 134.1 26.4C134.7 26.8 134.8 27.3 134.5 28.0C134.4 28.4 134.2 28.9 134.1 29.2C134.0 29.6 133.9 30.0 133.8 30.2C133.6 30.5 133.4 31.0 133.3 31.5C133.2 31.9 133.0 32.6 132.8 33.1C132.6 33.6 132.3 34.4 132.1 34.9C132.0 35.5 131.8 36.1 131.6 36.4C131.5 36.7 131.2 37.4 131.1 37.9C130.7 39.3 129.8 41.9 129.5 42.7C129.3 43.0 129.0 43.9 128.8 44.6C128.6 45.2 128.3 46.1 128.1 46.5C127.7 47.7 128.1 48.6 129.0 49.0C129.3 49.1 129.6 49.3 129.9 49.5C130.1 49.7 130.6 49.9 131.0 50.0C131.4 50.2 131.8 50.4 132.0 50.6C132.2 50.7 132.5 50.9 132.8 51.0C133.1 51.1 133.6 51.4 133.8 51.5C134.0 51.7 134.4 52.0 134.8 52.1C135.1 52.3 135.7 52.6 136.2 52.9C136.8 53.2 137.5 53.7 137.9 53.9C138.3 54.1 138.8 54.3 139.0 54.5C139.2 54.6 139.6 54.9 140.0 55.1C140.4 55.2 141.1 55.7 141.6 56.0C142.0 56.3 142.7 56.8 143.1 57.0C143.5 57.2 144.2 57.6 144.6 57.9C145.0 58.3 145.5 58.7 145.8 58.8C146.6 59.4 147.8 60.3 149.1 61.4C149.8 62.0 150.6 62.6 150.9 62.8C151.2 63.0 151.6 63.3 151.8 63.5C152.8 64.4 153.5 64.2 155.0 62.6C155.6 62.0 156.6 60.9 157.2 60.2C157.8 59.6 158.5 58.8 158.8 58.4C159.0 58.1 159.9 57.2 160.6 56.4C161.4 55.6 163.1 53.7 164.5 52.1C168.3 47.8 167.8 48.0 170.3 50.5C172.1 52.4 172.1 52.3 171.1 53.4C170.1 54.4 168.4 56.3 166.4 58.5C165.5 59.5 163.9 61.3 162.8 62.5C161.8 63.7 160.6 65.0 160.3 65.3C160.0 65.7 159.4 66.3 159.0 66.8C158.5 67.3 157.9 68.1 157.5 68.6C157.1 69.0 156.6 69.7 156.2 70.1C155.9 70.4 155.5 70.9 155.4 71.1C153.4 73.6 153.1 73.7 150.9 71.5Z"/></symbol><symbol id="cruz" viewBox="0 0 27 39"><path fill="currentColor" fill-rule="evenodd" d="M10.0 38.8C10.1 38.5 10.2 20.8 10.0 20.2C9.7 19.2 9.7 19.2 4.7 19.1C2.5 19.1 2.6 19.2 2.6 16.1C2.7 12.8 2.4 13.0 6.4 13.1C9.0 13.1 9.8 13.0 10.0 12.7C10.0 12.5 10.1 10.8 10.1 8.9C10.1 4.2 9.9 4.5 13.3 4.5C16.1 4.5 15.9 4.1 15.9 8.9C16.0 13.6 15.5 13.1 19.4 13.0C23.6 13.0 23.4 12.9 23.5 15.8C23.7 19.1 23.8 19.0 20.0 19.0C16.7 19.0 16.4 19.1 16.1 19.8C15.9 20.2 15.8 38.0 16.0 38.7C16.1 39.0 16.1 39.0 13.0 39.0C10.0 39.0 9.9 39.0 10.0 38.8Z"/></symbol></defs></svg>
+<!-- simbolos:fin -->
+
+<a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+<!-- ───────── Cortina: el monograma al rojo, se enfría y el panel baja hasta ser el zócalo ───────── -->
+<div class="cortina" id="cortina" aria-hidden="true">
+  <svg class="cortina__lienzo" id="cortina-lienzo" preserveAspectRatio="none">
+    <path class="cortina__panel" id="cortina-panel"/>
+  </svg>
+  <div class="cortina__contenido" id="cortina-contenido">
+    <div class="cortina__sello" id="cortina-sello">
+      <svg class="cortina__mm cortina__mm--halo-ancho" viewBox="0 0 178 176"><use href="#mm"/></svg>
+      <svg class="cortina__mm cortina__mm--halo" viewBox="0 0 178 176"><use href="#mm"/></svg>
+      <svg class="cortina__mm cortina__mm--almagre" viewBox="0 0 178 176"><use href="#mm"/></svg>
+      <svg class="cortina__mm cortina__mm--brasa" viewBox="0 0 178 176"><use href="#mm"/></svg>
+      <svg class="cortina__mm cortina__mm--vivo" viewBox="0 0 178 176"><use href="#mm"/></svg>
+    </div>
+    <p class="cortina__nombre"><span>Las Dehesillas</span></p>
+    <p class="cortina__pie">Alojamiento Rural</p>
+  </div>
+</div>
+
+<!-- ───────── Cabecera ───────── -->
+<header class="cabecera" id="cabecera">
+  <a class="marca" href="#inicio" aria-label="Las Dehesillas, ir al inicio">
+    <svg class="marca__mm" width="38" height="38" viewBox="0 0 178 176" aria-hidden="true"><use href="#mm"/></svg>
+    <span class="marca__nombre" aria-hidden="true">Las Dehesillas</span>
+  </a>
+  <nav class="cabecera__nav" id="menu" aria-label="Principal">
+    <a href="#la-finca">La finca</a>
+    <a href="#casas">Casas</a>
+    <a href="#que-hacer">Qué hacer</a>
+    <a href="#celebraciones" data-modulo="celebraciones">Celebraciones</a>
+    <a href="#como-llegar">Cómo llegar</a>
+    <a class="cabecera__llamar-movil" href="tel:+34636829845">Llamar · 636 82 98 45</a>
+  </nav>
+  <a class="boton boton--mini cabecera__cta iman" href="#consultar">Consultar fechas</a>
+  <button class="hamburguesa" id="hamburguesa" type="button" aria-expanded="false" aria-controls="menu">
+    <span class="hamburguesa__linea"></span><span class="hamburguesa__linea"></span>
+    <span class="visualmente-oculto">Abrir menú</span>
+  </button>
+  <span class="cabecera__progreso" id="progreso" aria-hidden="true"></span>
+</header>
+
+<main id="contenido">
+
+  <!-- ───────── Hero: tres casas de cal, la foto con su arco y el zócalo ───────── -->
+  <section class="hero" id="inicio" aria-labelledby="hero-titulo">
+    <div class="hero__texto">
+      <p class="antetitulo hero__ante">Alojamiento rural · Monesterio (Badajoz)</p>
+      <h1 class="hero__titulo" id="hero-titulo" data-revelar="letras">Tres casas<br> de cal en<br> <em>la dehesa</em></h1>
+      <p class="hero__sub">En la Sierra de Aguafría, Monesterio. <i>Encinas centenarias, piscina de agua salada y caballos.</i></p>
+      <dl class="cifras">
+        <div><dt>habitaciones</dt><dd>10</dd></div>
+        <div><dt>personas</dt><dd>22–34</dd></div>
+        <div><dt>en Google</dt><dd>4,6<span class="estrella" aria-hidden="true">★</span><span class="visualmente-oculto"> estrellas</span></dd></div>
+      </dl>
+      <div class="hero__acciones">
+        <a class="boton boton--almagre iman" href="#consultar">Consultar fechas</a>
+        <a class="boton boton--linea iman" href="tel:+34636829845">Llamar · 636 82 98 45</a>
+      </div>
+    </div>
+    <figure class="hero__foto" id="hero-foto">
+      <img src="assets/img/hero-piscina-1400.jpg" srcset="assets/img/hero-piscina-820.jpg 820w, assets/img/hero-piscina-1400.jpg 1400w"
+           sizes="(max-width: 900px) 92vw, 42vw" width="1400" height="1667" fetchpriority="high" decoding="async"
+           alt="La piscina de agua salada y, detrás, el torreón encalado del cortijo con sus ventanas en arco">
+    </figure>
+    <div class="zocalo hero__zocalo" id="hero-zocalo">
+      <p class="zocalo__texto"><span>Ctra. Santa María – Pallares, km 32</span> <span class="zocalo__punto" aria-hidden="true">·</span> <span>06260 Monesterio</span> <span class="zocalo__punto" aria-hidden="true">·</span> <span>Badajoz</span></p>
+    </div>
+  </section>
+
+  <!-- ═══ [MANDO DE MAQUETA] ficha rápida: solo se ve en la versión sobria ═══ -->
+  <section class="ficha" id="ficha" aria-labelledby="ficha-titulo">
+    <h2 class="ficha__titulo" id="ficha-titulo">Ficha rápida</h2>
+    <table class="ficha__tabla">
+      <tbody>
+        <tr><th scope="row">Capacidad</th><td>22 personas, hasta 34 con supletorias</td></tr>
+        <tr><th scope="row">Habitaciones</th><td>10, todas con baño privado, en 3 casas</td></tr>
+        <tr><th scope="row">Accesibilidad</th><td>Habitaciones para movilidad reducida y 3 baños adaptados</td></tr>
+        <tr><th scope="row">Mascotas</th><td>Sí, sin suplemento</td></tr>
+        <tr><th scope="row">Wifi</th><td>Gratis</td></tr>
+        <tr><th scope="row">Aparcamiento</th><td>Gratis, en la finca</td></tr>
+        <tr><th scope="row">Piscina</th><td>De agua salada, con vistas a la sierra</td></tr>
+        <tr><th scope="row">Pádel</th><td>Pista «infinity» frente a la dehesa</td></tr>
+      </tbody>
+    </table>
+  </section>
+  <!-- ═══ fin del bloque [MANDO DE MAQUETA] ═══ -->
+
+  <!-- ───────── La finca ───────── -->
+  <section class="finca" id="la-finca" aria-labelledby="finca-titulo">
+    <div class="finca__texto">
+      <p class="antetitulo">La finca</p>
+      <h2 class="titular" id="finca-titulo" data-revelar="palabras">En el corazón de la Sierra de Aguafría</h2>
+      <p class="entrada">Una dehesa de encinas centenarias, con senderos, un mirador para ver la fauna y una charca. En medio, el cortijo: cal blanca, zócalo de almagre y tres casas alrededor de un patio.</p>
+      <blockquote class="finca__cita">
+        <p data-revelar="letras">«Despierta rodeado de naturaleza y descansa a todo confort bajo uno de los cielos más espectaculares de Europa»</p>
+        <footer>— Las Dehesillas</footer>
+      </blockquote>
+    </div>
+    <figure class="finca__foto encalar" id="finca-foto">
+      <img src="assets/img/finca-naranjos-1600.jpg" srcset="assets/img/finca-naranjos-900.jpg 900w, assets/img/finca-naranjos-1600.jpg 1600w"
+           sizes="(max-width: 900px) 92vw, 50vw" width="1600" height="1067" loading="lazy" decoding="async"
+           alt="Terraza con dos sillones de madera bajo los naranjos, junto a la pared encalada con su zócalo de almagre; al fondo, la sierra">
+      <figcaption>La terraza de los naranjos, con su zócalo</figcaption>
+    </figure>
+  </section>
+
+  <div class="separa" aria-hidden="true"><span class="separa__banda"></span></div>
+
+  <!-- ───────── El plano de la finca ───────── -->
+  <section class="plano" id="plano" aria-labelledby="plano-titulo">
+    <div class="plano__fijo" id="plano-fijo">
+      <header class="plano__cabeza">
+        <p class="antetitulo">El plano de la finca</p>
+        <h2 class="titular" id="plano-titulo" data-revelar="palabras">La finca desde arriba</h2>
+        <p class="plano__ayuda" id="plano-ayuda">Cinco sitios para orientarte. Toca un punto para ir a su sección.</p>
+      </header>
+      <div class="plano__marco" id="plano-marco">
+        <div class="plano__camara" id="plano-camara">
+          <img src="assets/img/plano-aerea-1400.jpg" srcset="assets/img/plano-aerea-900.jpg 900w, assets/img/plano-aerea-1400.jpg 1400w, assets/img/plano-aerea-2400.jpg 2400w"
+               sizes="(max-width: 900px) 100vw, 62vw" width="2400" height="1350" loading="lazy" decoding="async"
+               alt="Vista aérea del cortijo: las casas encaladas con tejado de teja alrededor del patio, la piscina, la pista de pádel y la dehesa alrededor">
+          <a class="pin" href="#hacer-piscina" data-punto="1" style="--x:71%;--y:70%"><span aria-hidden="true">1</span><span class="visualmente-oculto">Piscina de agua salada</span></a>
+          <a class="pin" href="#hacer-padel" data-punto="2" style="--x:19%;--y:44%"><span aria-hidden="true">2</span><span class="visualmente-oculto">Pádel infinity</span></a>
+          <a class="pin" href="#la-finca" data-punto="3" style="--x:55.5%;--y:26%"><span aria-hidden="true">3</span><span class="visualmente-oculto">El patio</span></a>
+          <a class="pin" href="#casas" data-punto="4" style="--x:42%;--y:36%"><span aria-hidden="true">4</span><span class="visualmente-oculto">Las tres casas</span></a>
+          <a class="pin" href="#hacer-caballos" data-punto="5" style="--x:86%;--y:12%"><span aria-hidden="true">5</span><span class="visualmente-oculto">Dehesa y caballos</span></a>
+        </div>
+      </div>
+      <ol class="plano__lista" id="plano-lista">
+        <li class="punto" data-punto="1">
+          <a class="punto__enlace" href="#hacer-piscina">
+            <img class="punto__zona" src="assets/img/zona-piscina-560.jpg" width="560" height="348" loading="lazy" decoding="async" alt="">
+            <span class="punto__num">1</span><span class="punto__nombre">Piscina de agua salada</span>
+          </a>
+          <p class="punto__texto">Con vistas a la sierra.</p>
+        </li>
+        <li class="punto" data-punto="2">
+          <a class="punto__enlace" href="#hacer-padel">
+            <img class="punto__zona" src="assets/img/zona-padel-560.jpg" width="560" height="347" loading="lazy" decoding="async" alt="">
+            <span class="punto__num">2</span><span class="punto__nombre">Pádel infinity</span>
+          </a>
+          <p class="punto__texto">Una pista abierta, frente a la dehesa.</p>
+        </li>
+        <li class="punto" data-punto="3">
+          <a class="punto__enlace" href="#la-finca">
+            <img class="punto__zona" src="assets/img/zona-patio-560.jpg" width="560" height="347" loading="lazy" decoding="async" alt="">
+            <span class="punto__num">3</span><span class="punto__nombre">El patio</span>
+          </a>
+          <p class="punto__texto">El centro del cortijo, entre las casas.</p>
+        </li>
+        <li class="punto" data-punto="4">
+          <a class="punto__enlace" href="#casas">
+            <img class="punto__zona" src="assets/img/zona-casas-560.jpg" width="560" height="347" loading="lazy" decoding="async" alt="">
+            <span class="punto__num">4</span><span class="punto__nombre">Las tres casas</span>
+          </a>
+          <p class="punto__texto">10 habitaciones, todas con baño privado.</p>
+        </li>
+        <li class="punto" data-punto="5">
+          <a class="punto__enlace" href="#hacer-caballos">
+            <img class="punto__zona" src="assets/img/zona-dehesa-560.jpg" width="560" height="347" loading="lazy" decoding="async" alt="">
+            <span class="punto__num">5</span><span class="punto__nombre">Dehesa y caballos</span>
+          </a>
+          <p class="punto__texto">Encinas centenarias, senderos, el mirador y la charca.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="separa" aria-hidden="true"><span class="separa__banda"></span></div>
+
+  <!-- ───────── Las casas ───────── -->
+  <section class="casas" id="casas" aria-labelledby="casas-titulo">
+    <header class="casas__cabeza">
+      <div>
+        <p class="antetitulo">Las casas</p>
+        <h2 class="titular" id="casas-titulo" data-revelar="palabras">10 habitaciones en 3 casas</h2>
+        <p class="entrada">Para 22 personas, y hasta 34 con supletorias. Todas las habitaciones tienen su baño.</p>
+      </div>
+      <svg class="casas__dibujo" viewBox="0 0 420 150" aria-hidden="true" focusable="false">
+        <g class="casas__encina"><path d="M18 116c-10-2-14-14-6-21-5-11 6-21 16-17 4-10 20-12 26-3 10-4 21 4 19 14 9 3 9 16 0 19-4 8-16 9-22 4-8 6-24 6-33 4z"/><path class="casas__tronco" d="M40 118l2-14 4 0 2 14z"/></g>
+        <g class="casas__casa"><path class="casas__teja" d="M70 82l52-26 52 26z"/><rect class="casas__muro" x="78" y="82" width="88" height="44"/><rect class="casas__zocalo" x="78" y="116" width="88" height="10"/><rect class="casas__hueco" x="92" y="94" width="12" height="14"/><rect class="casas__hueco" x="140" y="94" width="12" height="14"/></g>
+        <g class="casas__casa"><path class="casas__teja" d="M176 70l46-24 46 24z"/><rect class="casas__muro" x="182" y="70" width="80" height="56"/><rect class="casas__zocalo" x="182" y="116" width="80" height="10"/><path class="casas__hueco" d="M214 126v-22a8 8 0 0 1 16 0v22z"/></g>
+        <g class="casas__casa"><path class="casas__teja" d="M270 84l50-24 50 24z"/><rect class="casas__muro" x="278" y="84" width="84" height="42"/><rect class="casas__zocalo" x="278" y="116" width="84" height="10"/><rect class="casas__hueco" x="292" y="94" width="12" height="13"/><rect class="casas__hueco" x="336" y="94" width="12" height="13"/></g>
+        <g class="casas__encina"><path d="M384 116c-8-2-11-12-5-17-3-9 5-17 13-14 4-8 17-9 21-2 8-3 16 3 15 11 7 3 6 13-1 15-3 6-13 7-18 3-7 5-18 5-25 4z"/><path class="casas__tronco" d="M402 118l2-12 3 0 2 12z"/></g>
+        <path class="casas__suelo" d="M0 126h420"/>
+      </svg>
+    </header>
+
+    <ul class="rasgos">
+      <li><span><strong>Baño privado</strong> en las 10 habitaciones</span></li>
+      <li><span><strong>Chimenea</strong>, calefactor y split de frío y calor</span></li>
+      <li><span><strong>TV</strong> de pantalla plana</span></li>
+      <li><span><strong>Habitaciones para niños</strong>, algunas solo para ellos</span></li>
+      <li><span><strong>Habitaciones accesibles</strong>, para movilidad reducida</span></li>
+      <li><span><strong>3 baños adaptados</strong></span></li>
+      <li><span><strong>Wifi</strong> y aparcamiento, gratis</span></li>
+      <li><span><strong>Supletorias</strong> para llegar a 34 personas</span></li>
+    </ul>
+    <p class="casas__nota">Cada habitación tiene nombre, y todos salen de la flora y la fauna de la finca.</p>
+
+    <ul class="galeria" aria-label="Interiores de las casas">
+      <li class="galeria__item galeria__item--alta">
+        <img src="assets/img/casa-butaca-1000.jpg" srcset="assets/img/casa-butaca-600.jpg 600w, assets/img/casa-butaca-1000.jpg 1000w" sizes="(max-width: 700px) 92vw, 30vw" width="1000" height="1367" loading="lazy" decoding="async" alt="Rincón de una habitación con pared de almagre, una butaca de tela de colores, una lámpara de pie y una ventana grande al campo">
+      </li>
+      <li class="galeria__item galeria__item--ancha">
+        <img src="assets/img/casa-salon-1400.jpg" srcset="assets/img/casa-salon-800.jpg 800w, assets/img/casa-salon-1400.jpg 1400w" sizes="(max-width: 700px) 92vw, 60vw" width="1400" height="934" loading="lazy" decoding="async" alt="Salón con chimenea, sofás de mimbre con cojines amarillos, ruedas de carro y bandejas de cobre en la pared">
+        <p class="galeria__pie">El salón, con su chimenea</p>
+      </li>
+      <li class="galeria__item">
+        <img src="assets/img/casa-dormitorio-800.jpg" srcset="assets/img/casa-dormitorio-800.jpg 800w, assets/img/casa-dormitorio-1400.jpg 1400w" sizes="(max-width: 700px) 92vw, 30vw" width="1400" height="955" loading="lazy" decoding="async" alt="Dormitorio con cama de matrimonio, cabecero de forja dorada y una pared en almagre">
+      </li>
+      <li class="galeria__item">
+        <img src="assets/img/casa-literas-800.jpg" srcset="assets/img/casa-literas-800.jpg 800w, assets/img/casa-literas-1400.jpg 1400w" sizes="(max-width: 700px) 92vw, 30vw" width="1400" height="933" loading="lazy" decoding="async" alt="Habitación con dos literas, pensada para niños">
+        <p class="galeria__pie">Una de las habitaciones para niños</p>
+      </li>
+      <li class="galeria__item">
+        <img src="assets/img/casa-bano-adaptado-800.jpg" srcset="assets/img/casa-bano-adaptado-800.jpg 800w, assets/img/casa-bano-adaptado-1400.jpg 1400w" sizes="(max-width: 700px) 92vw, 30vw" width="1400" height="934" loading="lazy" decoding="async" alt="Baño adaptado con ducha a ras de suelo, barras de apoyo junto al inodoro y lavabo sin mueble">
+        <p class="galeria__pie">Uno de los tres baños adaptados</p>
+      </li>
+      <li class="galeria__item galeria__item--ancha">
+        <img src="assets/img/casa-cocina-1400.jpg" srcset="assets/img/casa-cocina-800.jpg 800w, assets/img/casa-cocina-1400.jpg 1400w" sizes="(max-width: 700px) 92vw, 60vw" width="1400" height="967" loading="lazy" decoding="async" alt="Cocina vista a través de un vano encalado, con isla de madera, taburetes blancos y vigas en el techo">
+      </li>
+    </ul>
+
+    <!-- habitaciones.json: si un día trae nombres, se pintan aquí; vacío no deja hueco -->
+    <div class="fichas" id="fichas" hidden>
+      <h3 class="fichas__titulo">Las habitaciones, una a una</h3>
+      <ul class="fichas__lista" id="fichas-lista"></ul>
+    </div>
+
+    <div class="casas__pie">
+      <aside class="perro" aria-labelledby="perro-titulo">
+        <img src="assets/img/perro-600.jpg" srcset="assets/img/perro-600.jpg 600w, assets/img/perro-1000.jpg 1000w" sizes="(max-width: 700px) 92vw, 26vw" width="1000" height="767" loading="lazy" decoding="async" alt="Un golden retriever sonriente tumbado en la hierba, junto a una pared blanca">
+        <div>
+          <h3 class="perro__titulo" id="perro-titulo">Tu perro también viene</h3>
+          <p>La finca es 100 % pet friendly, y tu perro no paga suplemento.</p>
+        </div>
+      </aside>
+      <div class="visita360">
+        <h3 class="visita360__titulo">Visita virtual</h3>
+        <div class="visita360__marco">
+          <div class="consentimiento" id="visita-consentimiento">
+            <p>Una vista de 360º de la finca, alojada en Google. Solo se carga si la pides, y al cargarla Google puede poner sus cookies.</p>
+            <button class="boton boton--mini boton--almagre" id="visita-boton" type="button">Ver la visita virtual</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="separa" aria-hidden="true"><span class="separa__banda"></span></div>
+
+  <!-- ───────── Qué hacer: la pila ───────── -->
+  <section class="hacer" id="que-hacer" aria-labelledby="hacer-titulo">
+    <header class="hacer__cabeza">
+      <p class="antetitulo">Qué hacer</p>
+      <h2 class="titular" id="hacer-titulo" data-revelar="palabras">Sin salir de la finca</h2>
+    </header>
+    <ol class="pila" id="pila">
+      <li class="pila__item" id="hacer-caballos">
+        <article class="tarjeta">
+          <figure class="tarjeta__foto"><img src="assets/img/hacer-caballos-700.jpg" srcset="assets/img/hacer-caballos-500.jpg 500w, assets/img/hacer-caballos-700.jpg 700w" sizes="(max-width: 900px) 92vw, 44vw" width="700" height="710" loading="lazy" decoding="async" alt="Un jinete en un caballo blanco junto a la charca, con las encinas detrás y un perro en la orilla"></figure>
+          <div class="tarjeta__texto">
+            <p class="tarjeta__num">01</p>
+            <h3 class="tarjeta__titulo">Caballos</h3>
+            <p>Paseos a caballo entre encinas, hasta la charca.</p>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hacer-piscina">
+        <article class="tarjeta">
+          <figure class="tarjeta__foto"><img src="assets/img/hacer-piscina-1200.jpg" srcset="assets/img/hacer-piscina-700.jpg 700w, assets/img/hacer-piscina-1200.jpg 1200w" sizes="(max-width: 900px) 92vw, 44vw" width="1200" height="637" loading="lazy" decoding="async" alt="La piscina con tumbonas y sombrillas; detrás, el seto y la sierra"></figure>
+          <div class="tarjeta__texto">
+            <p class="tarjeta__num">02</p>
+            <h3 class="tarjeta__titulo">Piscina de agua salada</h3>
+            <p>Agua salada en vez de cloro, y la sierra de fondo.</p>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hacer-padel">
+        <article class="tarjeta">
+          <figure class="tarjeta__foto"><img src="assets/img/hacer-padel-1200.jpg" srcset="assets/img/hacer-padel-700.jpg 700w, assets/img/hacer-padel-1200.jpg 1200w" sizes="(max-width: 900px) 92vw, 44vw" width="1200" height="828" loading="lazy" decoding="async" alt="La pista de pádel con malla, y detrás las lomas de encinas"></figure>
+          <div class="tarjeta__texto">
+            <p class="tarjeta__num">03</p>
+            <h3 class="tarjeta__titulo">Pádel infinity</h3>
+            <p>Una pista abierta, mirando a la dehesa.</p>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hacer-buggy">
+        <article class="tarjeta">
+          <figure class="tarjeta__foto"><img src="assets/img/hacer-buggy-1200.jpg" srcset="assets/img/hacer-buggy-700.jpg 700w, assets/img/hacer-buggy-1200.jpg 1200w" sizes="(max-width: 900px) 92vw, 44vw" width="1200" height="800" loading="lazy" decoding="async" alt="Dos chicos saludan desde un buggy rojo en un camino de tierra entre la hierba y las encinas"></figure>
+          <div class="tarjeta__texto">
+            <p class="tarjeta__num">04</p>
+            <h3 class="tarjeta__titulo">Buggy y quad</h3>
+            <p>Se alquilan para recorrer los caminos de la finca.</p>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hacer-senderos">
+        <article class="tarjeta">
+          <figure class="tarjeta__foto"><img src="assets/img/hacer-mirador-1200.jpg" srcset="assets/img/hacer-mirador-700.jpg 700w, assets/img/hacer-mirador-1200.jpg 1200w" sizes="(max-width: 900px) 92vw, 44vw" width="1200" height="800" loading="lazy" decoding="async" alt="Una torrecilla de piedra en lo alto de un prado, bajo la copa de una encina, con la sierra al fondo"></figure>
+          <div class="tarjeta__texto">
+            <p class="tarjeta__num">05</p>
+            <h3 class="tarjeta__titulo">Senderos y mirador</h3>
+            <p>Senderos por la finca y un mirador para ver la fauna. Fuera, las rutas de Monesterio.</p>
+          </div>
+        </article>
+      </li>
+      <li class="pila__item" id="hacer-pingpong">
+        <article class="tarjeta">
+          <figure class="tarjeta__foto"><img src="assets/img/hacer-pingpong-1200.jpg" srcset="assets/img/hacer-pingpong-700.jpg 700w, assets/img/hacer-pingpong-1200.jpg 1200w" sizes="(max-width: 900px) 92vw, 44vw" width="1200" height="800" loading="lazy" decoding="async" alt="Dos palas de ping-pong y una pelota sobre la hierba"><figcaption class="tarjeta__credito">Foto de archivo</figcaption></figure>
+          <div class="tarjeta__texto">
+            <p class="tarjeta__num">06</p>
+            <h3 class="tarjeta__titulo">Ping-pong y juegos de mesa</h3>
+            <p>Para cuando aprieta el calor o cae la tarde.</p>
+          </div>
+        </article>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ───────── Marquee sobre almagre ───────── -->
+  <section class="cinta" id="cinta" aria-label="Lo que hay en Las Dehesillas">
+    <div class="cinta__pista" id="cinta-pista">
+      <div class="cinta__grupo">
+        <span>encinas</span><svg class="cinta__cruz" width="22" height="32" viewBox="0 0 27 39" aria-hidden="true"><use href="#cruz"/></svg>
+        <span>piscina salada</span><svg class="cinta__cruz" width="22" height="32" viewBox="0 0 27 39" aria-hidden="true"><use href="#cruz"/></svg>
+        <span>caballos</span><svg class="cinta__cruz" width="22" height="32" viewBox="0 0 27 39" aria-hidden="true"><use href="#cruz"/></svg>
+        <span>chimenea</span><svg class="cinta__cruz" width="22" height="32" viewBox="0 0 27 39" aria-hidden="true"><use href="#cruz"/></svg>
+        <span>pádel</span><svg class="cinta__cruz" width="22" height="32" viewBox="0 0 27 39" aria-hidden="true"><use href="#cruz"/></svg>
+        <span>tu perro también viene</span><svg class="cinta__cruz" width="22" height="32" viewBox="0 0 27 39" aria-hidden="true"><use href="#cruz"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ [MÓDULO CELEBRACIONES] se puede quitar: receta en el README ═══ -->
+  <section class="celebra" id="celebraciones" data-modulo="celebraciones" aria-labelledby="celebra-titulo">
+    <div class="celebra__cifra">
+      <p class="celebra__n"><span id="celebra-n" data-desde="22" data-hasta="34">34</span></p>
+      <p class="celebra__leyenda">personas alojadas, con supletorias</p>
+    </div>
+    <div class="celebra__cuerpo">
+      <p class="antetitulo">Celebraciones</p>
+      <h2 class="titular" id="celebra-titulo">Vuestra celebración, en la finca</h2>
+      <p class="entrada">Bodas, bautizos y comuniones, cumpleaños de grandes y pequeños, comidas de empresa y despedidas. Contadnos qué queréis celebrar y os decimos cómo encaja.</p>
+
+      <form class="config" id="config" novalidate>
+        <fieldset class="config__grupo">
+          <legend>Qué celebráis</legend>
+          <div class="chips">
+            <label><input type="radio" name="tipo" value="boda" checked><span>Boda</span></label>
+            <label><input type="radio" name="tipo" value="bautizo"><span>Bautizo</span></label>
+            <label><input type="radio" name="tipo" value="comunion"><span>Comunión</span></label>
+            <label><input type="radio" name="tipo" value="cumple"><span>Cumpleaños</span></label>
+            <label><input type="radio" name="tipo" value="empresa"><span>Empresa</span></label>
+            <label><input type="radio" name="tipo" value="despedida"><span>Despedida</span></label>
+          </div>
+        </fieldset>
+        <div class="config__fila">
+          <label class="config__campo config__campo--rango" for="config-personas">
+            <span>Cuántos sois</span>
+            <input type="range" id="config-personas" name="personas" min="2" max="60" step="1" value="28">
+            <output id="config-personas-salida" for="config-personas">28</output>
+          </label>
+          <label class="config__campo" for="config-mes">
+            <span>Fecha aproximada</span>
+            <select id="config-mes" name="mes">
+              <option value="">Aún sin fecha</option>
+              <option>enero</option><option>febrero</option><option>marzo</option><option>abril</option>
+              <option selected>mayo</option><option>junio</option><option>julio</option><option>agosto</option>
+              <option>septiembre</option><option>octubre</option><option>noviembre</option><option>diciembre</option>
+            </select>
+          </label>
+        </div>
+        <p class="config__aviso" id="config-aviso" hidden>Para más invitados, preguntadnos por los espacios.</p>
+        <fieldset class="config__grupo">
+          <legend>¿Necesitáis alojamiento?</legend>
+          <div class="chips chips--pequenas">
+            <label><input type="radio" name="aloja" value="si" checked><span>Sí</span></label>
+            <label><input type="radio" name="aloja" value="no"><span>No</span></label>
+            <label><input type="radio" name="aloja" value="quiza"><span>Aún no lo sabemos</span></label>
+          </div>
+        </fieldset>
+        <label class="config__campo" for="config-comentarios">
+          <span>Comentarios <i>(opcional)</i></span>
+          <textarea id="config-comentarios" name="comentarios" rows="2" placeholder="Hora, comida, algo que os importe…"></textarea>
+        </label>
+        <div class="mensaje" aria-live="polite">
+          <p class="mensaje__rotulo">Vuestro mensaje</p>
+          <p class="mensaje__texto" id="config-texto">Hola, somos 28 y queremos celebrar una boda hacia mayo. Necesitaríamos alojamiento. ¿Nos contáis qué opciones hay? Gracias.</p>
+        </div>
+        <div class="acciones">
+          <a class="boton boton--almagre iman" id="config-email" href="mailto:cristinamunozma@gmail.com?subject=Celebraci%C3%B3n%20en%20Las%20Dehesillas">Enviar por email</a>
+          <button class="boton boton--linea" id="config-copiar" type="button">Copiar mensaje</button>
+          <a class="boton boton--linea" href="tel:+34636829845">Llamar</a>
+        </div>
+        <p class="acciones__estado" id="config-estado" role="status"></p>
+      </form>
+    </div>
+  </section>
+  <!-- ═══ fin [MÓDULO CELEBRACIONES] ═══ -->
+
+  <!-- ───────── Reseñas ───────── -->
+  <section class="resenas" id="resenas" aria-labelledby="resenas-titulo">
+    <header class="resenas__cabeza">
+      <p class="antetitulo">Lo que dicen en Google</p>
+      <h2 class="resenas__nota" id="resenas-titulo">4,6<span class="estrella" aria-hidden="true">★</span><span class="visualmente-oculto"> estrellas</span> <span class="resenas__cuantas"><span class="visualmente-oculto">· </span>100 reseñas en Google</span></h2>
+    </header>
+    <ul class="citas">
+      <li class="cita">
+        <blockquote><p>«Paraje perfecto en un entorno ideal. Las calidades del alojamiento han cumplido nuestras expectativas. Limpieza y orden. Han estado muy atentos a todo: incluso los dueños de la finca se han prestado a llevarnos a conocer partes de la finca y los animales de la misma. Todo de 10. Para repetir y muy recomendable.»</p></blockquote>
+        <p class="cita__firma">Jesus <span>· en Google</span></p>
+      </li>
+      <li class="cita">
+        <blockquote><p>«Fantástica experiencia, a la casa no le falta detalle, todo muy limpio y el entorno precioso, sin duda lo recomiendo para desconectar unos días.»</p></blockquote>
+        <p class="cita__firma">Judit <span>· en Google</span></p>
+      </li>
+      <li class="cita">
+        <blockquote><p>«Casa rural preciosa en un enclave muy bonito. Las habitaciones muy cuidadas, los baños nuevos y las camas también cómodas. La zona de barbacoa muy familiar. En general muy recomendable»</p></blockquote>
+        <p class="cita__firma">Yolanda <span>· en Google</span></p>
+      </li>
+    </ul>
+    <a class="boton boton--linea iman" href="https://www.google.com/maps/place/Alojamiento+Rural+Badajoz+Las+Dehesillas/@38.0451853,-6.1022847,17z/data=!4m8!3m7!1s0xd13c71a552482a7:0x799aabdd9136cf78!8m2!3d38.0451853!4d-6.1022847!9m1!1b1!16s%2Fg%2F11c2j0k79n" target="_blank" rel="noopener">Leer las reseñas en Google</a>
+  </section>
+
+  <div class="separa" aria-hidden="true"><span class="separa__banda"></span></div>
+
+  <!-- ───────── Cómo llegar ───────── -->
+  <section class="llegar" id="como-llegar" aria-labelledby="llegar-titulo">
+    <div class="llegar__texto">
+      <p class="antetitulo">Cómo llegar</p>
+      <h2 class="titular" id="llegar-titulo" data-revelar="palabras">Km 32 de la BA-067</h2>
+      <address class="llegar__direccion">Ctra. Santa María – Pallares, km 32 (BA-067)<br>06260 Monesterio (Badajoz)</address>
+      <p>Por la BA-067, en el km 32, en dirección Santa María / Pallares.</p>
+      <p class="llegar__aviso">Las indicaciones detalladas te las enviamos al confirmar la reserva.</p>
+      <p class="llegar__enlaces"><a class="enlace" href="https://www.google.com/maps/dir/?api=1&amp;destination=38.0451853%2C-6.1022847" target="_blank" rel="noopener">Abrir la ruta en Google Maps</a> · <a class="enlace" href="tel:+34636829845">636 82 98 45</a></p>
+    </div>
+    <div class="mapa">
+      <div class="consentimiento" id="mapa-consentimiento">
+        <p>El mapa es de Google Maps y solo se carga si lo pides. Al cargarlo, Google puede poner sus propias cookies.</p>
+        <button class="boton boton--mini boton--almagre" id="mapa-boton" type="button">Ver el mapa</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── Consultar fechas ───────── -->
+  <section class="consultar" id="consultar" aria-labelledby="consultar-titulo">
+    <header class="consultar__cabeza">
+      <p class="antetitulo">Consultar fechas</p>
+      <h2 class="titular" id="consultar-titulo" data-revelar="palabras">Dinos cuándo quieres venir</h2>
+      <p class="entrada">Rellena lo que sepas y te preparamos el mensaje para mandarlo por email o copiarlo. Si lo prefieres, llama al <a class="enlace" href="tel:+34636829845">636 82 98 45</a>.</p>
+    </header>
+    <form class="reserva" id="reserva" novalidate>
+      <label class="campo" for="r-nombre"><span>Nombre</span><input id="r-nombre" name="nombre" autocomplete="name" required></label>
+      <label class="campo" for="r-email"><span>Email</span><input id="r-email" name="email" type="email" autocomplete="email"></label>
+      <label class="campo" for="r-telefono"><span>Teléfono</span><input id="r-telefono" name="telefono" type="tel" autocomplete="tel"></label>
+      <label class="campo" for="r-llegada"><span>Llegada</span><input id="r-llegada" name="llegada" type="date" required></label>
+      <label class="campo" for="r-salida"><span>Salida</span><input id="r-salida" name="salida" type="date" required></label>
+      <label class="campo" for="r-tipo"><span>Tipo de habitación</span><input id="r-tipo" name="tipo" placeholder="Doble, para niños, accesible…"></label>
+      <label class="campo campo--corto" for="r-adultos"><span>Adultos</span><input id="r-adultos" name="adultos" type="number" min="1" max="40" value="2" inputmode="numeric" required></label>
+      <label class="campo campo--corto" for="r-ninos"><span>Niños</span><input id="r-ninos" name="ninos" type="number" min="0" max="40" value="0" inputmode="numeric"></label>
+      <label class="campo campo--ancho" for="r-preferencias"><span>Preferencias</span><textarea id="r-preferencias" name="preferencias" rows="3" placeholder="Si vienes con perro, si necesitas una habitación accesible…"></textarea></label>
+      <p class="reserva__error" id="reserva-error" role="alert"></p>
+      <button class="boton boton--almagre iman reserva__enviar" type="submit">Preparar el mensaje</button>
+      <div class="reserva__listo" id="reserva-listo" hidden>
+        <p class="mensaje__rotulo">Tu mensaje</p>
+        <pre class="reserva__texto" id="reserva-texto"></pre>
+        <div class="acciones">
+          <a class="boton boton--almagre" id="reserva-email" href="mailto:cristinamunozma@gmail.com">Enviar por email</a>
+          <button class="boton boton--linea" id="reserva-copiar" type="button">Copiar mensaje</button>
+          <a class="boton boton--linea" href="tel:+34636829845">Llamar</a>
+        </div>
+        <p class="acciones__estado" id="reserva-estado" role="status"></p>
+      </div>
+    </form>
+  </section>
+
+</main>
+
+<!-- ───────── Pie: el zócalo cierra la página ───────── -->
+<footer class="pie" id="pie">
+  <div class="pie__rejilla">
+    <img class="pie__logo" src="assets/logo-dehesillas.svg" width="558" height="184" alt="Las Dehesillas · Alojamiento Rural" loading="lazy">
+    <div class="pie__datos">
+      <p>Ctra. Santa María – Pallares, km 32 (BA-067)<br>06260 Monesterio (Badajoz)</p>
+      <p><a href="tel:+34636829845">636 82 98 45</a></p>
+      <p><a href="https://www.instagram.com/fincalasdehesillas/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/p/Alojamiento-Rural-Las-Dehesillas-100063698915081/" target="_blank" rel="noopener">Facebook</a></p>
+    </div>
+    <div class="pie__legal">
+      <p><a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad y cookies</a> · <button class="enlace" type="button" id="cookies-reabrir">Aviso de cookies</button></p>
+      <p>© <span id="anio">2026</span> Las Dehesillas</p>
+    </div>
+  </div>
+  <div class="zocalo pie__zocalo" aria-hidden="true"><p class="zocalo__texto">Sierra de Aguafría · Monesterio</p></div>
+</footer>
+
+<!-- ───────── Aviso de cookies ───────── -->
+<div class="cookies" id="cookies" role="region" aria-label="Aviso de cookies" hidden>
+  <p class="cookies__texto">
+    Esta web no usa cookies de seguimiento. Solo guarda en tu navegador que ya has visto este aviso.
+    El mapa y la visita virtual de Google se cargan únicamente si los pides. <a href="privacidad.html">Más información</a>.
+  </p>
+  <div class="cookies__acciones">
+    <button class="boton boton--mini boton--almagre" id="cookies-aceptar" type="button">De acuerdo</button>
+  </div>
+</div>
+
+<!-- ═══ [MANDO DE MAQUETA] · solo con ?revision · NO VIAJA AL CLIENTE ═══ -->
+<div class="mando" id="mando" hidden>
+  <span class="mando__titulo">Versión</span>
+  <div class="mando__botones" role="group" aria-label="Densidad visual de la maqueta">
+    <button type="button" data-densidad="cal" aria-pressed="true">Cal y almagre</button>
+    <button type="button" data-densidad="sobria" aria-pressed="false">Sobria</button>
+  </div>
+  <span class="mando__pie">Dos versiones de la misma web</span>
+</div>
+<!-- ═══ fin del bloque [MANDO DE MAQUETA] ═══ -->
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/main.js?v=49bffd1b"></script>
+<script src="js/celebraciones.js?v=6aef1d0a" data-modulo="celebraciones"></script>
+</body>
+</html>

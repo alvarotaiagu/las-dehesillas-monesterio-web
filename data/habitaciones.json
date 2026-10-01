@@ -1,0 +1,15 @@
+{
+  "_nota": "Las 10 habitaciones. Sus nombres salen de la flora y la fauna de la finca, pero NO están publicados: pedírselos al dueño. Mientras el nombre sea [PENDIENTE], la web no pinta nada y la sección se ve completa sin estas fichas. En cuanto una entrada tenga nombre, aparece su ficha en «Las casas» sin tocar el HTML. foto: ruta dentro de la web (p. ej. assets/img/hab-01-800.jpg), pasada por scripts/gradar.py.",
+  "habitaciones": [
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" },
+    { "nombre": "[PENDIENTE]", "casa": "[PENDIENTE]", "camas": "[PENDIENTE]", "foto": "[PENDIENTE]" }
+  ]
+}
