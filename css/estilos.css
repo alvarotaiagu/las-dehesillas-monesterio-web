@@ -470,7 +470,8 @@ html.con-js.cortina-fuera .cortina { display: none; }
 
 .casas__pie { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.4rem); max-width: 96rem; margin: clamp(3rem, 6vw, 4.6rem) auto 0; }
 .perro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: 1.4rem; background: var(--cal-tostada); }
-.perro img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+/* alto propio por proporción: con height:100% en una fila auto el alto es circular y en el iPhone el texto se montaba encima */
+.perro img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
 .perro div { padding: 1.2rem 1.4rem 1.2rem 0; }
 .perro__titulo { font: 400 clamp(1.6rem, 2.6vw, 2.3rem)/1 var(--tipo-rotulo); text-transform: uppercase; margin-bottom: .6rem; }
 .visita360 { display: grid; grid-template-rows: auto 1fr; gap: .8rem; }

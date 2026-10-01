@@ -18,7 +18,7 @@
    node scripts/verificar.mjs            (todo)
    node scripts/verificar.mjs --capturas (además guarda screenshots/)
 */
-import { chromium } from 'file:///C:/Users/alvar/Desktop/WEBS%20NEGOCIOS/alvarotaiagu.github.io/node_modules/playwright/index.mjs';
+import { chromium, webkit, devices } from 'file:///C:/Users/alvar/Desktop/WEBS%20NEGOCIOS/alvarotaiagu.github.io/node_modules/playwright/index.mjs';
 import http from 'node:http';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -839,6 +839,35 @@ try {
     }
     s3.close();
     fs.rmSync(destino, { recursive: true, force: true });
+  }
+
+  /* ───── 14b. WebKit (Safari de iPhone): la foto del perro no queda bajo su texto ─────
+     La foto tenía height:100% dentro de una fila auto: alto circular, y en un iPhone
+     real el título «Tu perro también viene» se montaba encima. */
+  {
+    let wk = null;
+    try { wk = await webkit.launch(); } catch (e) { comprobar(false, 'WebKit no está instalado: npx playwright install webkit'); }
+    if (wk) {
+      for (const disp of ['iPhone SE', 'iPhone 13', 'iPhone 14 Pro Max']) {
+        const c = await wk.newContext({ ...devices[disp] });
+        await c.addInitScript(() => { try { localStorage.setItem('dehesillas-cookies', 'ok'); } catch (e) {} });
+        const p = await c.newPage();
+        const err = [];
+        p.on('pageerror', e => err.push(e.message));
+        await p.goto(base + '/index.html', { waitUntil: 'networkidle' });
+        await esperarCortina(p);
+        await p.evaluate(() => document.querySelector('.perro').scrollIntoView({ block: 'center' }));
+        await p.waitForTimeout(800);
+        const r = await p.evaluate(() => {
+          const img = document.querySelector('.perro img').getBoundingClientRect();
+          const t = document.querySelector('.perro__titulo').getBoundingClientRect();
+          return { imgAbajo: Math.round(img.bottom), tituloArriba: Math.round(t.top), altoImg: Math.round(img.height), proporcion: +(img.width / img.height).toFixed(2), cargada: document.querySelector('.perro img').complete };
+        });
+        comprobar(r.tituloArriba >= r.imgAbajo && Math.abs(r.proporcion - 1.33) <= 0.02 && err.length === 0, 'WebKit ' + disp + ': el texto del perro va debajo de su foto (4:3) → ' + JSON.stringify(r));
+        await c.close();
+      }
+      await wk.close();
+    }
   }
 
   /* ───── 15. orden de secciones en la maqueta ───── */
